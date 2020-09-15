@@ -3,14 +3,18 @@ import time
 
 
 def show_board(board):
-    print(f" {board[0]} | {board[1]} | {board[2]} ")
-    print(f"---+---+---")
-    print(f" {board[3]} | {board[4]} | {board[5]} ")
-    print(f"---+---+---")
-    print(f" {board[6]} | {board[7]} | {board[8]} \n\n")
+    """Display well-formatted board."""
+    print("-------------")
+    print(f"| {board[0]} | {board[1]} | {board[2]} |")
+    print("|---+---+---|")
+    print(f"| {board[3]} | {board[4]} | {board[5]} |")
+    print("|---+---+---|")
+    print(f"| {board[6]} | {board[7]} | {board[8]} |")
+    print("-------------\n\n")
 
 
 def get_p_move(board):
+    "Get and validate user move based on current board state."
     available = []
 
     for i in range(len(board)):
@@ -35,6 +39,7 @@ def get_p_move(board):
 
 
 def check_board(board):
+    """Check board for whether someone has won yet."""
     if board[0] == board[1] == board[2]:
         return True
     elif board[3] == board[4] == board[5]:
@@ -56,6 +61,9 @@ def check_board(board):
 
 
 def cpu_strategic_move(board):
+    """Determine optimal cpu move based on current state of board."""
+
+    # check for spots where cpu is one move away from winning
     if (board[0] == board[1] == "X") and (board[2] != "O"):
         return 2
     if (board[1] == board[2] == "X") and (board[0] != "O"):
@@ -104,7 +112,8 @@ def cpu_strategic_move(board):
         return 4
     if (board[2] == board[6] == "X") and (board[4] != "O"):
         return 4
-    #######################################################
+    
+    # check for spots where the cpu is one away from losing
     if (board[0] == board[1] == "O") and (board[2] != "X"):
         return 2
     if (board[1] == board[2] == "O") and (board[0] != "X"):
@@ -154,6 +163,15 @@ def cpu_strategic_move(board):
     if (board[2] == board[6] == "O") and (board[4] != "X"):
         return 4
 
+    # choose random spot if board is neutral
+    available = []
+
+    for i in range(len(board)):
+        if board[i] != "X" and board[i] != "O":
+            available.append(i)
+    
+    return random.choice(available)
+
 
 def check_for_tie(board):
     available = []
@@ -169,21 +187,30 @@ def check_for_tie(board):
 
 
 def main():
+    # default wait time (to ensure smooth gameplay)
     DELAY = 2
 
+    # declare board with list comprehension
     board = [str(i) for i in range (0, 9)]
-
+    
+    # game intro
+    print("\n~~~~~~~~~~~~~~~~~~~~~~~")
+    print("Welcome to Tic Tac Toe!")
+    print("~~~~~~~~~~~~~~~~~~~~~~~")
+    time.sleep(DELAY)
+    print()
     print()
     show_board(board)
     time.sleep(DELAY)
     print("CPU plays first.\n\n")
     time.sleep(DELAY)
 
+    # cpu chooses random spot out of set of corner spots and center
     options = [0, 2, 4, 6, 8]
     board[random.choice(options)] = "X"
 
+    # get player move
     show_board(board)
-
     p_move = get_p_move(board)
     board[p_move] = "O"
     time.sleep(DELAY)
@@ -193,45 +220,46 @@ def main():
     print("CPU move.\n\n")
     time.sleep(DELAY)
 
+    # cpu chooses spot out of remaining corner and center spots
     new_options = []
-
     for option in options:
         if not(board[option] == "X" or board[option] == "O"):
             new_options.append(option)
-    
     board[random.choice(new_options)] = "X"
     show_board(board)
 
+    # game mainloop
     while True:
+        # get player move
         p_move = get_p_move(board)
         board[p_move] = "O"
         time.sleep(DELAY)
         print()
         show_board(board)
 
+        # check if game is either won or tied
         game_is_over = check_board(board)
         if game_is_over:
             break
-
         game_is_tie = check_for_tie(board)
         if game_is_tie:
             print("Tie!")
             break
 
+        # cpu makes strategic move
         time.sleep(DELAY)
         print("CPU move.\n\n")
         time.sleep(DELAY)
-
         cpu_move = cpu_strategic_move(board)
         board[cpu_move] = "X"
         time.sleep(DELAY)
         print()
         show_board(board)
 
+        # check if game is either won or tied
         game_is_over = check_board(board)
         if game_is_over:
             break
-
         game_is_tie = check_for_tie(board)
         if game_is_tie:
             print("Tie")
