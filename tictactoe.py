@@ -40,22 +40,58 @@ def get_p_move(board):
 
 def check_board(board):
     """Check board for whether someone has won yet."""
-    if board[0] == board[1] == board[2]:
-        return True
-    elif board[3] == board[4] == board[5]:
-        return True
-    elif board[6] == board[7] == board[8]:
-        return True
-    elif board[0] == board[3] == board[6]:
-        return True
-    elif board[1] == board[4] == board[7]:
-        return True
-    elif board[2] == board[5] == board[8]:
-        return True
-    elif board[0] == board[4] == board[8]:
-        return True
-    elif board[2] == board[4] == board[6]:
-        return True
+
+    # check if cpu wins
+    if board[0] == board[1] == board[2] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[3] == board[4] == board[5] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[6] == board[7] == board[8] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[0] == board[3] == board[6] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[1] == board[4] == board[7] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[2] == board[5] == board[8] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[0] == board[4] == board[8] == "X":
+        print("CPU WINS!")
+        exit()
+    elif board[2] == board[4] == board[6] == "X":
+        print("CPU WINS!")
+        exit()
+
+    # check if player wins
+    elif board[0] == board[1] == board[2] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[3] == board[4] == board[5] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[6] == board[7] == board[8] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[0] == board[3] == board[6] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[1] == board[4] == board[7] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[2] == board[5] == board[8] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[0] == board[4] == board[8] == "O":
+        print("YOU WIN!")
+        exit()
+    elif board[2] == board[4] == board[6] == "O":
+        print("YOU WIN!")
+        exit()
     else:
         return False
 
@@ -182,9 +218,10 @@ def check_for_tie(board):
             available.append(i)
     
     if len(available) == 0:
-        return True
+        print("IT'S A TIE!")
+        exit()
     else:
-        return False
+        pass
 
 
 def main():
@@ -239,13 +276,8 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        game_is_over = check_board(board)
-        if game_is_over:
-            break
-        game_is_tie = check_for_tie(board)
-        if game_is_tie:
-            print("Tie!")
-            break
+        check_board(board)
+        check_for_tie(board)
 
         # cpu makes strategic move
         time.sleep(DELAY)
@@ -258,13 +290,8 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        game_is_over = check_board(board)
-        if game_is_over:
-            break
-        game_is_tie = check_for_tie(board)
-        if game_is_tie:
-            print("Tie")
-            break
+        check_board(board)
+        check_for_tie(board)
 
 
 if __name__ == '__main__':
