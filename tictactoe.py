@@ -223,17 +223,15 @@ def cpu_strategic_move(board):
 
 def check_for_tie(board):
     """"""
-    available = []
+    available = 0
 
-    for i in range(len(board)):
-        if i != "X" and i != "O":
-            available.append(i)
+    for i in board:
+        if i != "O" and i != "X":
+            available += 1
     
-    if len(available) == 0:
+    if available == 0:
         print("IT'S A TIE!")
         exit()
-    else:
-        pass
 
 
 def main():
