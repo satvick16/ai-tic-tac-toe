@@ -3,7 +3,10 @@ import time
 
 
 def show_board(board):
-    """Display well-formatted board."""
+    """Display well-formatted board.
+    @type board: list
+    @rtype: None
+    """
     print("-------------")
     print(f"| {board[0]} | {board[1]} | {board[2]} |")
     print("|---+---+---|")
@@ -14,7 +17,10 @@ def show_board(board):
 
 
 def get_p_move(board):
-    """Get and validate user move based on current board state."""
+    """Get and validate user move based on current board state.
+    @type board: list
+    @rtype: int
+    """
     available = []
 
     for i in range(len(board)):
@@ -29,17 +35,20 @@ def get_p_move(board):
             print("Invalid entry.")
             continue
 
-        if not(move in available):
+        if not((move - 1) in available):
             print("That spot is unavailable.")
             continue
         else:
             break
     
-    return move
+    return move - 1
 
 
-def check_board(board):
-    """Check board for whether someone has won yet."""
+def check_for_win(board):
+    """Check board for whether someone has won yet.
+    @type board: list
+    @rtype: None
+    """
 
     # check if cpu wins
     if board[0] == board[1] == board[2] == "X":
@@ -93,11 +102,14 @@ def check_board(board):
         print("YOU WIN!")
         exit()
     else:
-        return False
+        pass
 
 
 def cpu_strategic_move(board):
-    """Determine optimal cpu move based on current state of board."""
+    """Determine optimal cpu move based on current state of board.
+    @type board: list
+    @rtype: int
+    """
 
     # check for spots where cpu is one move away from winning
     if (board[0] == board[1] == "X") and (board[2] != "O"):
@@ -229,7 +241,7 @@ def main():
     DELAY = 2
 
     # declare board with list comprehension
-    board = [str(i) for i in range (0, 9)]
+    board = [str(i) for i in range (1, 10)]
     
     # game intro
     print("\n~~~~~~~~~~~~~~~~~~~~~~~")
@@ -255,7 +267,7 @@ def main():
     print()
     show_board(board)
     time.sleep(DELAY)
-    print("CPU move.\n\n")
+    print("CPU move:\n\n")
     time.sleep(DELAY)
 
     # cpu chooses spot out of remaining corner and center spots
@@ -276,12 +288,12 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        check_board(board)
+        check_for_win(board)
         check_for_tie(board)
 
         # cpu makes strategic move
         time.sleep(DELAY)
-        print("CPU move.\n\n")
+        print("CPU move:\n\n")
         time.sleep(DELAY)
         cpu_move = cpu_strategic_move(board)
         board[cpu_move] = "X"
@@ -290,7 +302,7 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        check_board(board)
+        check_for_win(board)
         check_for_tie(board)
 
 
