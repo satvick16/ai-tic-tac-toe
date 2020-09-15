@@ -222,7 +222,10 @@ def cpu_strategic_move(board):
 
 
 def check_for_tie(board):
-    """"""
+    """Checks if game is a draw based on current state of board.
+    @type board: list
+    @rtype: None
+    """
     available = 0
 
     for i in board:
