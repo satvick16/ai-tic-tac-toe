@@ -14,7 +14,7 @@ def show_board(board):
 
 
 def get_p_move(board):
-    "Get and validate user move based on current board state."
+    """Get and validate user move based on current board state."""
     available = []
 
     for i in range(len(board)):
@@ -174,6 +174,7 @@ def cpu_strategic_move(board):
 
 
 def check_for_tie(board):
+    """"""
     available = []
 
     for i in range(len(board)):
