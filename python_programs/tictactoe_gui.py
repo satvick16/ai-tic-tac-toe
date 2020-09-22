@@ -1,5 +1,18 @@
 import random
 import time
+import pygame
+
+
+pygame.init()
+win = pygame.display.set_mode((500, 500))
+pygame.display.set_caption("Tic Tac Toe")
+
+
+run = True
+while run:
+    for event in pygame.event.get():
+	if event.type == pygame.QUIT:
+	    run = False
 
 
 # default wait time (to ensure smooth gameplay)
@@ -11,13 +24,13 @@ def show_board(board):
     @type board: list
     @rtype: None
     """
-    print("/-----------\\")
+    print("-------------")
     print(f"| {board[0]} | {board[1]} | {board[2]} |")
     print("|---+---+---|")
     print(f"| {board[3]} | {board[4]} | {board[5]} |")
     print("|---+---+---|")
     print(f"| {board[6]} | {board[7]} | {board[8]} |")
-    print("\-----------/\n\n")
+    print("-------------\n\n")
 
 
 def get_p_move(board):
