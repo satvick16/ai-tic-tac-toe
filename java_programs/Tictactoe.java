@@ -88,6 +88,8 @@ public class Main {
 	}
 	
 	public static void checkForWin(String[] board) {
+		//TODO: '==' operator does not work for String data type
+		
 		if (board[0] == board[1] == board[2] == "X") {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
@@ -106,12 +108,13 @@ public class Main {
 		} else if (board[2] == board[5] == board[8] == "X") {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} elif board[0] == board[4] == board[8] == "X":
+		} else if (board[0] == board[4] == board[8] == "X") {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-	    elif board[2] == board[4] == board[6] == "X":
+	    	} else if (board[2] == board[4] == board[6] == "X") {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
+		}
 	}
 
 }
