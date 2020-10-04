@@ -90,7 +90,7 @@ public class Main {
 	public static void checkForWin(String[] board) {
 		//TODO: '==' operator does not work for String data type
 		
-		if (board[0] == board[1] == board[2] == "X") {
+		if (board[0].equals(board[1]).equals(board[2]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
 		} else if (board[3] == board[4] == board[5] == "X") {
