@@ -57,7 +57,11 @@ public class Main {
 			System.out.println("");
 			showBoard(board);
 			
-			
+			checkForWin(board);
+			checkForTie(board);
+
+			System.out.println("CPU move:\n\n");
+
 		}
 	}
 	
@@ -86,35 +90,185 @@ public class Main {
 		
 		return move - 1;
 	}
+
+	public static void checkForTie(String[] board) {
+		int available = 0;
+		
+		for (int i = 0; i <= board.length; i++) {
+			if (board[i] != "X" && board[i] != "O")
+				available++;
+		}
+
+		if (available == 0) {
+			System.out.println("IT'S A TIE!");
+			System.exit(0);
+		}
+	}
 	
 	public static void checkForWin(String[] board) {
-		//TODO: '==' operator does not work for String data type
-		
 		if (board[0].equals(board[1]).equals(board[2]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} else if (board[3] == board[4] == board[5] == "X") {
+		} else if (board[3].equals(board[4]).equals(board[5]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} else if (board[6] == board[7] == board[8] == "X") {
+		} else if (board[6].equals(board[7]).equals(board[8]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} else if (board[0] == board[3] == board[6] == "X") {
+		} else if (board[0].equals(board[3]).equals(board[6]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit();
-		} else if (board[1] == board[4] == board[7] == "X") {
+		} else if (board[1].equals(board[4]).equals(board[7]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} else if (board[2] == board[5] == board[8] == "X") {
+		} else if (board[2].equals(board[5]).equals(board[8]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-		} else if (board[0] == board[4] == board[8] == "X") {
+		} else if (board[0].equals(board[4]).equals(board[8]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
-	    	} else if (board[2] == board[4] == board[6] == "X") {
+    	} else if (board[2].equals(board[4]).equals(board[6]).equals("X")) {
 	        System.out.println("CPU WINS!");
 	        System.exit(0);
+		} 
+
+		else if (board[0].equals(board[1]).equals(board[2]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+		} else if (board[3].equals(board[4]).equals(board[5]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+		} else if (board[6].equals(board[7]).equals(board[8]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+		} else if (board[0].equals(board[3]).equals(board[6]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit();
+		} else if (board[1].equals(board[4]).equals(board[7]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+		} else if (board[2].equals(board[5]).equals(board[8]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+		} else if (board[0].equals(board[4]).equals(board[8]).equals("O")) {
+	        System.out.println("CPU WINS!");
+	        System.exit(0);
+    	} else if (board[2].equals(board[4]).equals(board[6]).equals("O")) {
+        System.out.println("CPU WINS!");
+        System.exit(0);
+		} else {
+			;
 		}
+	}
+
+	public static int cpuStrategicMove(String[] board) {
+		if (board[0].equals(board[1]).equals("X")) and !(board[2].equals("O")):
+        return 2
+	    if (board[1] == board[2] == "X") and (board[0] != "O"):
+	        return 0
+	    if (board[3] == board[4] == "X") and (board[5] != "O"):
+	        return 5
+	    if (board[4] == board[5] == "X") and (board[3] != "O"):
+	        return 3
+	    if (board[6] == board[7] == "X") and (board[8] != "O"):
+	        return 8
+	    if (board[7] == board[8] == "X") and (board[6] != "O"):
+	        return 6
+	    if (board[0] == board[3] == "X") and (board[6] != "O"):
+	        return 6
+	    if (board[3] == board[6] == "X") and (board[0] != "O"):
+	        return 0
+	    if (board[1] == board[4] == "X") and (board[7] != "O"):
+	        return 7
+	    if (board[4] == board[7] == "X") and (board[1] != "O"):
+	        return 1
+	    if (board[2] == board[5] == "X") and (board[8] != "O"):
+	        return 8
+	    if (board[5] == board[8] == "X") and (board[2] != "O"):
+	        return 2
+	    if (board[0] == board[4] == "X") and (board[8] != "O"):
+	        return 8
+	    if (board[2] == board[4] == "X") and (board[6] != "O"):
+	        return 6
+	    if (board[6] == board[4] == "X") and (board[2] != "O"):
+	        return 2
+	    if (board[8] == board[4] == "X") and (board[0] != "O"):
+	        return 0
+	    if (board[0] == board[2] == "X") and (board[1] != "O"):
+	        return 1
+	    if (board[3] == board[5] == "X") and (board[4] != "O"):
+	        return 4
+	    if (board[6] == board[8] == "X") and (board[7] != "O"):
+	        return 7
+	    if (board[0] == board[6] == "X") and (board[3] != "O"):
+	        return 3
+	    if (board[2] == board[8] == "X") and (board[5] != "O"):
+	        return 5
+	    if (board[1] == board[7] == "X") and (board[4] != "O"):
+	        return 4
+	    if (board[0] == board[8] == "X") and (board[4] != "O"):
+	        return 4
+	    if (board[2] == board[6] == "X") and (board[4] != "O"):
+	        return 4
+	    
+	    # check for spots where the cpu is one away from losing
+	    if (board[0] == board[1] == "O") and (board[2] != "X"):
+	        return 2
+	    if (board[1] == board[2] == "O") and (board[0] != "X"):
+	        return 0
+	    if (board[3] == board[4] == "O") and (board[5] != "X"):
+	        return 5
+	    if (board[4] == board[5] == "O") and (board[3] != "X"):
+	        return 3
+	    if (board[6] == board[7] == "O") and (board[8] != "X"):
+	        return 8
+	    if (board[7] == board[8] == "O") and (board[6] != "X"):
+	        return 6
+	    if (board[0] == board[3] == "O") and (board[6] != "X"):
+	        return 6
+	    if (board[3] == board[6] == "O") and (board[0] != "X"):
+	        return 0
+	    if (board[1] == board[4] == "O") and (board[7] != "X"):
+	        return 7
+	    if (board[4] == board[7] == "O") and (board[1] != "X"):
+	        return 1
+	    if (board[2] == board[5] == "O") and (board[8] != "X"):
+	        return 8
+	    if (board[5] == board[8] == "O") and (board[2] != "X"):
+	        return 2
+	    if (board[0] == board[4] == "O") and (board[8] != "X"):
+	        return 8
+	    if (board[2] == board[4] == "O") and (board[6] != "X"):
+	        return 6
+	    if (board[6] == board[4] == "O") and (board[2] != "X"):
+	        return 2
+	    if (board[8] == board[4] == "O") and (board[0] != "X"):
+	        return 0
+	    if (board[0] == board[2] == "O") and (board[1] != "X"):
+	        return 1
+	    if (board[3] == board[5] == "O") and (board[4] != "X"):
+	        return 4
+	    if (board[6] == board[8] == "O") and (board[7] != "X"):
+	        return 7
+	    if (board[0] == board[6] == "O") and (board[3] != "X"):
+	        return 3
+	    if (board[2] == board[8] == "O") and (board[5] != "X"):
+	        return 5
+	    if (board[1] == board[7] == "O") and (board[4] != "X"):
+	        return 4
+	    if (board[0] == board[8] == "O") and (board[4] != "X"):
+	        return 4
+	    if (board[2] == board[6] == "O") and (board[4] != "X"):
+	        return 4
+
+	    # choose random spot if board is neutral
+	    available = []
+
+	    for i in range(len(board)):
+	        if board[i] != "X" and board[i] != "O":
+	            available.append(i)
+	    
+	    return random.choice(available)	
 	}
 
 }
