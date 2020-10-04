@@ -4,6 +4,23 @@ import time
 DELAY = 2
 
 
+def check_for_tie(board):
+    """Checks if game is a draw based on current state of board.
+    @type board: list
+    @rtype: None
+    """
+    available = 0
+
+    for i in board:
+        if i != "O" and i != "X":
+            available += 1
+    
+    if available == 0:
+        print("IT'S A TIE!")
+        time.sleep(DELAY)
+        exit()
+
+
 def check_for_win(board):
     """Check board for whether someone has won yet.
     @type board: list
