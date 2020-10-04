@@ -50,23 +50,6 @@ def get_p_move(board):
     return move - 1
 
 
-def check_for_tie(board):
-    """Checks if game is a draw based on current state of board.
-    @type board: list
-    @rtype: None
-    """
-    available = 0
-
-    for i in board:
-        if i != "O" and i != "X":
-            available += 1
-    
-    if available == 0:
-        print("IT'S A TIE!")
-        time.sleep(DELAY)
-        exit()
-
-
 def main():
     # declare board with list comprehension
     board = [str(i) for i in range (1, 10)]
@@ -117,7 +100,7 @@ def main():
 
         # check if game is either won or tied
         evaluate.check_for_win(board)
-        check_for_tie(board)
+        evaluate.check_for_tie(board)
 
         # cpu makes strategic move
         time.sleep(DELAY)
@@ -131,7 +114,7 @@ def main():
 
         # check if game is either won or tied
         evaluate.check_for_win(board)
-        check_for_tie(board)
+        evaluate.check_for_tie(board)
 
 
 if __name__ == '__main__':
