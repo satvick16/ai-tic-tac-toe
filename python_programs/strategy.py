@@ -1,3 +1,6 @@
+import random
+
+
 def cpu_strategic_move(board):
     """Determine optimal cpu move based on current state of board.
     @type board: list
