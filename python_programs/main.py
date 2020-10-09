@@ -59,7 +59,7 @@ def who_goes_first():
     """
     while True:
         try:
-            preference = str(input("Who should go first? (C)PU or (P)layer?"))
+            preference = str(input("Who should go first? (C)PU or (P)layer: "))
             print()
         # reject if input is not a string
         except ValueError:
@@ -133,7 +133,8 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        evaluate.check_for_win(board)
+        evaluate.check_for_win(board, "X")
+        evaluate.check_for_win(board, "O")
         evaluate.check_for_tie(board)
 
         # cpu makes strategic move
@@ -147,7 +148,8 @@ def main():
         show_board(board)
 
         # check if game is either won or tied
-        evaluate.check_for_win(board)
+        evaluate.check_for_win(board, "X")
+        evaluate.check_for_win(board, "O")
         evaluate.check_for_tie(board)
 
 
