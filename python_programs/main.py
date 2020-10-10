@@ -4,14 +4,13 @@ import evaluate
 import strategy
 
 
-# default wait time (to ensure smooth gameplay)
-DELAY = 2
+DELAY = 1.5
 
 
 def show_board(board):
-    """Display well-formatted board.
-    @type board: list
-    @rtype: None
+    """
+    Display well-formatted board in the console.
+    :param board: a list containing the current state of the board
     """
     print("/-----------\\")
     print(f"| {board[0]} | {board[1]} | {board[2]} |")
@@ -23,11 +22,11 @@ def show_board(board):
 
 
 def get_p_move(board):
-    """Get and validate user move based on current board state.
-    @type board: list
-    @rtype: int
     """
-    # find all available spots on the board
+    Get and validate user move based on current board state.
+    :param board: a list containing the current state of the board
+    :return: the integer index of the player's next move
+    """
     available = []
 
     for i in range(len(board)):
@@ -38,12 +37,10 @@ def get_p_move(board):
         try:
             move = int(input("Your move: "))
             print()
-        # reject if input is not an int
         except ValueError:
             print("Invalid entry.")
             continue
 
-        # reject if player has selected a spot that is already occupied
         if not((move - 1) in available):
             print("That spot is unavailable.")
             continue
@@ -54,19 +51,18 @@ def get_p_move(board):
 
 
 def who_goes_first():
-    """Get and validate user preference for who plays first.
-    @rtype: bool
+    """
+    Get and validate user preference for who plays first.
+    :return: True if player wants computer to go first
     """
     while True:
         try:
             preference = str(input("Who should go first? (C)PU or (P)layer: "))
             print()
-        # reject if input is not a string
         except ValueError:
             print("Invalid entry.")
             continue
 
-        # reject if input is not c or p
         if not(preference == "C" or preference == "c" or preference == "P" or preference == "p"):
             print("Invalid entry")
             continue
@@ -76,69 +72,61 @@ def who_goes_first():
     return True if (preference == "C" or preference == "c") else False
 
 
+def check_if_game_over(board):
+    """
+    Check if game is a tie or someone has won yet and end game when necessary.
+    :param board: a list containing the current state of the board
+    """
+    spam = evaluate.check_for_win(board)
+
+    if spam == "X":
+        print("CPU WINS!")
+        exit()
+    if spam == "O":
+        print("YOU WIN!")
+        exit()
+
+    evaluate.check_for_tie(board)
+
+
 def main():
-    # declare board with list comprehension
+    # declare 9x9 board
     board = [str(i) for i in range (1, 10)]
     
-    # game intro
+    # print welcome message
     print("\n~~~~~~~~~~~~~~~~~~~~~~~")
     print("Welcome to Tic Tac Toe!")
     print("~~~~~~~~~~~~~~~~~~~~~~~")
     time.sleep(DELAY)
-    print()
-    print()
+    print("\n")
     show_board(board)
     time.sleep(DELAY)
 
-    # ask user if they want to move first or second
+    # get user preference for who goes first
     cpu_is_first = who_goes_first()
 
-    # set of all corner spots and center of board (advantageous positions)
-    options = [0, 2, 4, 6, 8]
-
     if cpu_is_first:
-        print("CPU plays first.\n\n")
-        time.sleep(DELAY)
-
-        # cpu chooses random spot out of set of corner spots and center
-        board[random.choice(options)] = "X"
-        show_board(board)
-        time.sleep(DELAY)
-    else:
-        # get player move
-        p_move = get_p_move(board)
-        board[p_move] = "O"
-        time.sleep(DELAY)
-        print()
-        show_board(board)
-        time.sleep(DELAY)
+        # execute AI-driven strategic move for CPU
         print("CPU move:\n\n")
         time.sleep(DELAY)
-
-        # cpu chooses spot out of remaining corner and center spots
-        new_options = []
-        for option in options:
-            if not(board[option] == "X" or board[option] == "O"):
-                new_options.append(option)
-        board[random.choice(new_options)] = "X"
+        cpu_move = strategy.cpu_strategic_move(board)
+        board[cpu_move] = "X"
         show_board(board)
-
-    # game mainloop
+        time.sleep(DELAY)
+    
     while True:
-        # get player move
+        # get, validate and execute player move
         p_move = get_p_move(board)
         board[p_move] = "O"
         time.sleep(DELAY)
         print()
         show_board(board)
 
-        # check if game is either won or tied
-        evaluate.check_for_win(board, "X")
-        evaluate.check_for_win(board, "O")
-        evaluate.check_for_tie(board)
-
-        # cpu makes strategic move
+        # check if game is tied or someone has won
+        check_if_game_over(board)
         time.sleep(DELAY)
+        
+        # execute AI-driven strategic move for CPU
         print("CPU move:\n\n")
         time.sleep(DELAY)
         cpu_move = strategy.cpu_strategic_move(board)
@@ -147,10 +135,8 @@ def main():
         print()
         show_board(board)
 
-        # check if game is either won or tied
-        evaluate.check_for_win(board, "X")
-        evaluate.check_for_win(board, "O")
-        evaluate.check_for_tie(board)
+        # check if game is tied or someone has won
+        check_if_game_over(board)
 
 
 if __name__ == '__main__':
