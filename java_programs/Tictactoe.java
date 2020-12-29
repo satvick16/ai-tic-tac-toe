@@ -62,13 +62,13 @@ public class Main {
 	public static boolean whoGoesFirst() {
 		while (true) {
 			Scanner getUserPreference = new Scanner(System.in);
-			System.out.println("Who should go first? (C)PU or (P)layer: ")
+			System.out.println("Who should go first? (C)PU or (P)layer: ");
 			String preference = getUserPreference.nextString();
 
-			String bigC = "C"
-			String smC = "c"
-			String bigP = "P"
-			String smP = "p"
+			String bigC = "C";
+			String smC = "c";
+			String bigP = "P";
+			String smP = "p";
 
 			if !(preference.equals(bigC) || preference.equals(smC) || preference.equals(bigP) || preference.equals(smP)) {
 				System.out.println("Invalid entry.");
