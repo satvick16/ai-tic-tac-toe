@@ -32,7 +32,7 @@ public class Tictactoe {
 		}
 
 		while (true) {
-			p_move = getPMove(board);
+			int p_move = getPMove(board);
 			board[p_move] = "O";
 			System.out.println();
 			showBoard(board);
@@ -60,23 +60,14 @@ public class Tictactoe {
 	}
 
 	public static boolean whoGoesFirst() {
-		while (true) {
-			Scanner getUserPreference = new Scanner(System.in);
-			System.out.println("Who should go first? (C)PU or (P)layer: ");
-			String preference = getUserPreference.nextString();
+		String bigC = "C";
+		String smC = "c";
+		String bigP = "P";
+		String smP = "p";
 
-			String bigC = "C";
-			String smC = "c";
-			String bigP = "P";
-			String smP = "p";
-
-			if (!(preference.equals(bigC) || preference.equals(smC) || preference.equals(bigP) || preference.equals(smP))) {
-				System.out.println("Invalid entry.");
-				continue;
-			} else {
-				break;
-			}
-		}
+		Scanner getUserPreference = new Scanner(System.in);
+		System.out.println("Who should go first? (C)PU or (P)layer: ");
+		String preference = getUserPreference.nextString();
 
 		if (preference.equals(bigC) || preference.equals(smC)) {
 			return true;
@@ -102,7 +93,7 @@ public class Tictactoe {
 	}
 
 	public static void checkIfGameOver(String[] board) {
-		int spam = checkForWin(board);
+		String spam = checkForWin(board);
 
 		if (spam.equals("X")) {
 			System.out.println("CPU WINS!");
@@ -131,21 +122,21 @@ public class Tictactoe {
 	}
 	
 	public static String checkForWin(String[] board) {
-		if (board[0] == board[1] == board[2])
+		if (board[0].equals(board[1]) && board[0].equals(board[2]))
 			return board[0];
-		else if (board[3] == board[4] == board[5])
+		else if (board[3].equals(board[4]) && board[3].equals(board[5]))
 			return board[3];
-		else if (board[6] == board[7] == board[8])
+		else if (board[6].equals(board[7]) && board[6].equals(board[8]))
 			return board[6];
-		else if (board[0] == board[3] == board[6])
+		else if (board[0].equals(board[3]) && board[0].equals(board[6]))
 			return board[0];
-		else if (board[1] == board[4] == board[7])
+		else if (board[1].equals(board[4]) && board[1].equals(board[7]))
 			return board[1];
-		else if (board[2] == board[5] == board[8])
+		else if (board[2].equals(board[5]) && board[2].equals(board[8]))
 			return board[2];
-		else if (board[0] == board[4] == board[8])
+		else if (board[0].equals(board[4]) && board[0].equals(board[8]))
 			return board[0];
-		else if (board[2] == board[4] == board[6])
+		else if (board[2].equals(board[4]) && board[2].equals(board[6]))
 			return board[2];
 		else
 			return null;
@@ -155,18 +146,18 @@ public class Tictactoe {
 	    ArrayList<Integer> possible_moves = new ArrayList<Integer>();
 
 	    for (int spot = 0; spot <= board.length; spot++) {
-			if (!(board[spot] == "X" || board[i] == "O"))
-				available.add(spot);
+			if (!(board[spot] == "X" || board[spot] == "O"))
+				possible_moves.add(spot);
 		}
 
 		String[] options = {"X", "O"};
 
 		for (String i : options) {
 			for (int j = 0; j < possible_moves.size(); j++) {
-				int[] board_copy = board.clone();
-				board_copy[move] = options[i];
+				String[] board_copy = board.clone();
+				board_copy[possible_moves.get(j)] = i;
 				if (checkForWin(board_copy))
-					return board[move];
+					return board[possible_moves.get(j)];
 			}
 		}
 
@@ -174,8 +165,8 @@ public class Tictactoe {
 		int[] good_options = {0, 2, 4, 6, 8};
 
 		for (int k = 0; k < possible_moves.size(); k++) {
-			if (Arrays.asList(possible_moves).contains(possible_moves[k]))
-				good_spots.add(possible_moves[k]);
+			if (possible_moves.contains(possible_moves.get(k)))
+				good_spots.add(possible_moves.get(k));
 		}
 
 		if (good_spots.contains(4))
@@ -183,7 +174,7 @@ public class Tictactoe {
 
 		if (good_spots.size() > 0) {
 			Random rand = new Random();
-			int choice = rand.nextInt(available.length);
+			int choice = rand.nextInt(possible_moves.length);
 			return board[choice];
 		}
 
@@ -191,13 +182,13 @@ public class Tictactoe {
 		int[] edge_options = {0, 2, 4, 6, 8};
 
 		for (int m = 0; m < possible_moves.size(); m++) {
-			if (Arrays.asList(possible_moves).contains(possible_moves[m]))
-				edge_spots.add(possible_moves[m]);
+			if (possible_moves.contains(possible_moves.get(m)))
+				edge_spots.add(possible_moves.get(m));
 		}
 
 		if (edge_spots.size() > 0) {
 			Random rand = new Random();
-			int choice = rand.nextInt(available.length);
+			int choice = rand.nextInt(possible_moves.length);
 			return board[choice];
 		}
 	}
