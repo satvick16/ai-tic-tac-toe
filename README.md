@@ -2,6 +2,10 @@
 
 This repository contains java and python3 implementations of a console tic-tac-toe AI that can only win or tie with the player.
 
+## Sample Output
+
+![Sample output 1](https://github.com/satvick16/ai-tic-tac-toe/blob/master/pytictactoesample.png?raw=true)
+
 ## Getting Started
 
 First clone the entire repository. 
