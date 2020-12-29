@@ -64,7 +64,7 @@ def who_goes_first():
             continue
 
         if not(preference == "C" or preference == "c" or preference == "P" or preference == "p"):
-            print("Invalid entry")
+            print("Invalid entry.")
             continue
         else:
             break

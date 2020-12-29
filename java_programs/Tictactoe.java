@@ -4,6 +4,7 @@
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +12,6 @@ import java.util.ArrayList;
  *
  */
 public class Tictactoe {
-	
-	final int delay = 2;
 
 	public static void main(String[] args) {
 		String[] board = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -60,16 +59,11 @@ public class Tictactoe {
 	}
 
 	public static boolean whoGoesFirst() {
-		String bigC = "C";
-		String smC = "c";
-		String bigP = "P";
-		String smP = "p";
-
 		Scanner getUserPreference = new Scanner(System.in);
 		System.out.println("Who should go first? (C)PU or (P)layer: ");
-		String preference = getUserPreference.nextString();
+		String preference = getUserPreference.nextLine();
 
-		if (preference.equals(bigC) || preference.equals(smC)) {
+		if (preference.equals("C") || preference.equals("c")) {
 			return true;
 		} else {
 			return false;
@@ -79,17 +73,17 @@ public class Tictactoe {
 	public static int getPMove(String[] board) {
 		ArrayList<Integer> available = new ArrayList<Integer>();
 		
-		for (int i = 0; i <= board.length; i++) {
-			if (board[i] != "X" && board[i] != "O")
+		for (int i = 0; i < board.length; i++) {
+			if (!(board[i].equals("X") || board[i].equals("O")))
 				available.add(i);
 		}
 		
-		// TODO 'while true' input validation for move
 		Scanner getPMove = new Scanner(System.in);
 		System.out.println("Your move: ");
 		int move = getPMove.nextInt();
-		
-		return move - 1;
+
+		int rmove = move - 1;
+		return rmove;
 	}
 
 	public static void checkIfGameOver(String[] board) {
@@ -109,9 +103,9 @@ public class Tictactoe {
 
 	public static void checkForTie(String[] board) {
 		int available = 0;
-		
-		for (int i = 0; i <= board.length; i++) {
-			if (board[i] != "X" && board[i] != "O")
+
+		for (String i : board) {
+			if (!(i.equals("O") || i.equals("X")))
 				available++;
 		}
 
@@ -139,34 +133,34 @@ public class Tictactoe {
 		else if (board[2].equals(board[4]) && board[2].equals(board[6]))
 			return board[2];
 		else
-			return null;
+			return "false";
 	}
 
 	public static int cpuStrategicMove(String[] board) {
 	    ArrayList<Integer> possible_moves = new ArrayList<Integer>();
 
-	    for (int spot = 0; spot <= board.length; spot++) {
+	    for (int spot = 0; spot < board.length; spot++) {
 			if (!(board[spot] == "X" || board[spot] == "O"))
 				possible_moves.add(spot);
 		}
 
 		String[] options = {"X", "O"};
 
-		for (String i : options) {
-			for (int j = 0; j < possible_moves.size(); j++) {
+		for (String letter : options) {
+			for (int move : possible_moves) {
 				String[] board_copy = board.clone();
-				board_copy[possible_moves.get(j)] = i;
-				if (checkForWin(board_copy))
-					return board[possible_moves.get(j)];
+				board_copy[move] = letter;
+				if (checkForWin(board_copy) != "false")
+					return move;
 			}
 		}
 
 		ArrayList<Integer> good_spots = new ArrayList<Integer>();
 		int[] good_options = {0, 2, 4, 6, 8};
 
-		for (int k = 0; k < possible_moves.size(); k++) {
-			if (possible_moves.contains(possible_moves.get(k)))
-				good_spots.add(possible_moves.get(k));
+		for (int i : possible_moves) {
+			if (Arrays.asList(good_options).contains(i))
+				good_spots.add(i);
 		}
 
 		if (good_spots.contains(4))
@@ -174,23 +168,25 @@ public class Tictactoe {
 
 		if (good_spots.size() > 0) {
 			Random rand = new Random();
-			int choice = rand.nextInt(possible_moves.length);
-			return board[choice];
+			int choice = rand.nextInt(good_spots.size());
+			return good_spots.get(choice);
 		}
 
 		ArrayList<Integer> edge_spots = new ArrayList<Integer>();
-		int[] edge_options = {0, 2, 4, 6, 8};
+		int[] edge_options = {1, 3, 5, 7};
 
-		for (int m = 0; m < possible_moves.size(); m++) {
-			if (possible_moves.contains(possible_moves.get(m)))
-				edge_spots.add(possible_moves.get(m));
+		for (int i : possible_moves) {
+			if (Arrays.asList(edge_options).contains(i))
+				edge_spots.add(i);
 		}
 
 		if (edge_spots.size() > 0) {
 			Random rand = new Random();
-			int choice = rand.nextInt(possible_moves.length);
-			return board[choice];
+			int choice = rand.nextInt(edge_spots.size());
+			return edge_spots.get(choice);
 		}
+
+		return 0;
 	}
 
 }

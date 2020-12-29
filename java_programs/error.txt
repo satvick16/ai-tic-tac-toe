@@ -1,13 +1,4 @@
-Tictactoe.java:66: error: cannot find symbol
-			String preference = getUserPreference.nextString();
-			                                     ^
-  symbol:   method nextString()
-  location: variable getUserPreference of type Scanner
-
-
-Tictactoe.java:187: error: incompatible types: String cannot be converted to int
-			return board[choice];
-			            ^
-Tictactoe.java:201: error: incompatible types: String cannot be converted to int
-			return board[choice];
-			            ^
+Tictactoe.java:193: error: missing return statement
+	}
+	^
+1 error
