@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Satvick Acharya
  *
  */
-public class Main {
+public class Tictactoe {
 	
 	final int delay = 2;
 
@@ -70,7 +70,7 @@ public class Main {
 			String bigP = "P";
 			String smP = "p";
 
-			if !(preference.equals(bigC) || preference.equals(smC) || preference.equals(bigP) || preference.equals(smP)) {
+			if (!(preference.equals(bigC) || preference.equals(smC) || preference.equals(bigP) || preference.equals(smP))) {
 				System.out.println("Invalid entry.");
 				continue;
 			} else {
@@ -155,7 +155,7 @@ public class Main {
 	    ArrayList<Integer> possible_moves = new ArrayList<Integer>();
 
 	    for (int spot = 0; spot <= board.length; spot++) {
-			if !(board[spot] == "X" || board[i] == "O")
+			if (!(board[spot] == "X" || board[i] == "O"))
 				available.add(spot);
 		}
 
@@ -165,7 +165,7 @@ public class Main {
 			for (int j = 0; j < possible_moves.size(); j++) {
 				int[] board_copy = board.clone();
 				board_copy[move] = options[i];
-				if checkForWin(board_copy)
+				if (checkForWin(board_copy))
 					return board[move];
 			}
 		}
