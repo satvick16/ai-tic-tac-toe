@@ -1,6 +1,6 @@
 # Unbeatable Tic Tac Toe AI
 
-This repository contains java and python3 implementations of a console tic-tac-toe AI that can only win or tie with the player.
+This repository contains Java and Python implementations of a console tic-tac-toe AI that can only win or tie with the player.
 
 ## Getting Started
 

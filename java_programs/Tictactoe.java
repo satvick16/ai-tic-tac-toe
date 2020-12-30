@@ -74,7 +74,7 @@ public class Tictactoe {
 		ArrayList<Integer> available = new ArrayList<Integer>();
 		
 		for (int i = 0; i < board.length; i++) {
-			if (!(board[i].equals("X") || board[i].equals("O")))
+			if (!board[i].equals("X") && !board[i].equals("O"))
 				available.add(i);
 		}
 		
