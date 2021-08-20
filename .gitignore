@@ -1,2 +1,1 @@
-python_programs/__pycache__/
-*.pyc
+!**/__pycache__/
