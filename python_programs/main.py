@@ -12,11 +12,11 @@ def show_board(board):
     :param board: a list containing the current state of the board
     """
     print("/-----------\\")
-    print(f"| {board[0]} | {board[1]} | {board[2]} |")
-    print("|---+---+---|")
-    print(f"| {board[3]} | {board[4]} | {board[5]} |")
-    print("|---+---+---|")
-    print(f"| {board[6]} | {board[7]} | {board[8]} |")
+    print(f"| {board[0]} | {board[1]} | {board[2]} |\t 1 | 2 | 3 ")
+    print("|---+---+---|\t---+---+---")
+    print(f"| {board[3]} | {board[4]} | {board[5]} |\t 4 | 5 | 6 ")
+    print("|---+---+---|\t---+---+---")
+    print(f"| {board[6]} | {board[7]} | {board[8]} |\t 7 | 8 | 9 ")
     print("\-----------/\n\n")
 
 
@@ -90,7 +90,7 @@ def check_if_game_over(board):
 
 def main():
     # declare 9x9 board
-    board = [str(i) for i in range (1, 10)]
+    board = [" " for i in range (1, 10)]
     
     # print welcome message
     print("\n~~~~~~~~~~~~~~~~~~~~~~~")
